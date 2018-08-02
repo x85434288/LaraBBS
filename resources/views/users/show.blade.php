@@ -12,7 +12,7 @@
                         </div>
                         <div class="media-body">
                             <hr>
-                            <h4><strong>个人简介</strong></h4>
+                            <h4><strong>个人1简介</strong></h4>
                             <p>{{ $user->introduction }}</p>
                             <hr>
                             <h4><strong>注册于</strong></h4>
