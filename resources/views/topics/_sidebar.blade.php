@@ -2,7 +2,9 @@
 
     <div class="panel-body">
 
-        左侧导航
+        <a href="{{ route('topics.create') }}" class="btn btn-success btn-block" aria-label="Left Align">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 新建帖子
+        </a>
 
     </div>
 
