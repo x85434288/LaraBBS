@@ -41,6 +41,7 @@
 
                     <div class="topic-body">
                         {!! $topic->body !!}
+
                     </div>
 
                     <div class="operate">
