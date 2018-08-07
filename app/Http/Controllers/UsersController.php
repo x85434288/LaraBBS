@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
@@ -24,7 +25,9 @@ class UsersController extends Controller
     public function show(User $user)
     {
 
-        return view('users.show',compact('user'));
+        //$topics = $topic->with('user','category')->where('user_id', $user->id)->paginate();
+        $topics =  $user->topics()->with('user','category')->recent()->paginate(5);
+        return view('users.show',compact('user','topics'));
 
     }
 
