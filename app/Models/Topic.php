@@ -62,6 +62,16 @@ class Topic extends Model
     }
 
 
+    //SEO 路由链接
+
+    public function link($param=[])
+    {
+
+        return route('topics.show', array_merge([$this->id,$this->slug],$param));
+
+    }
+
+
     
     
     
