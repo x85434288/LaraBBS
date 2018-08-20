@@ -72,8 +72,11 @@
             <div class="panel panel-default topic-reply">
                 <div class="panel-body">
 
-                    @include('topics._reply_box',['topic'=>$topic])
-                    @include('topics._reply_list',['replies'=>$topic->replies()->with('user')->orderBy('created_at','desc')->get()])
+                    {{--@include('topics._reply_box',['topic'=>$topic])--}}
+
+                    @includeWhen(Auth::check(), 'topics._reply_box', ['topic'=>$topic])
+
+                    @include('topics._reply_list', ['replies'=>$topic->replies()->with('user')->orderBy('created_at','desc')->get()])
 
                 </div>
             </div>
