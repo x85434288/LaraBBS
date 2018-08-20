@@ -27,7 +27,7 @@
                 <div class="panel-body">
                     <span>
                         <h1 class="panel-title pull-left" style="font-size: 30px">
-                            {{ $user->name }}<small>{{ $user->email }}</small>
+                            {{ $user->name }}   <small>{{ $user->email }}</small>
                         </h1>
                     </span>
                 </div>
@@ -37,18 +37,22 @@
             {{-- 用户发布的内容 --}}
             <div class="panel panel-default">
                 <div class="panel-body">
-
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#">Ta的话题</a> </li>
-                        <li><a href="#">Ta的回复</a> </li>
+                        <li class="{{ active_class(if_query('tab', null)) }}">
+                            <a href="{{ route('users.show', $user->id) }}">Ta 的话题</a>
+                        </li>
+                        <li class="{{ active_class(if_query('tab', 'replies')) }}">
+                            <a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}">Ta 的回复</a>
+                        </li>
                     </ul>
-
-                    {{--@include('topics._topic_list', ['topics' => $user->topics()->recent()->paginate(5)])--}}
-                    @include('users.topic_list')
-
+                    @if (if_query('tab', 'replies'))
+                        @include('users._reply_list', ['replies' => $user->replies()->with('topic')->recent()->paginate(5)])
+                    @else
+                        @include('users.topic_list', ['topics' => $user->topics()->recent()->paginate(5)])
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
-@endsection
+@stop

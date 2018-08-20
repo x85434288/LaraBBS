@@ -6,17 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 
 class SeedCategoriesData extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        //
-
-        $data = [
-
+        $categories = [
             [
                 'name'        => '分享',
                 'description' => '分享创造，分享发现',
@@ -33,21 +25,13 @@ class SeedCategoriesData extends Migration
                 'name'        => '公告',
                 'description' => '站点公告',
             ],
-
         ];
 
-        DB::table('categories')->insert($data);
-
+        DB::table('categories')->insert($categories);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
-        Db::table('categories')->truncate();
+        DB::table('categories')->truncate();
     }
 }
