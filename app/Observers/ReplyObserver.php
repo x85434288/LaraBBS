@@ -28,4 +28,13 @@ class ReplyObserver
 
 
     }
+
+    //删除回复后topic减1
+    public function deleted(Reply $reply)
+    {
+
+        $reply->topic->decrement('reply_count',1);
+        
+    }
+    
 }

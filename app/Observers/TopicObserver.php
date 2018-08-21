@@ -33,14 +33,28 @@ class TopicObserver
         // 如 slug 字段无内容，即使用翻译器对 title 进行翻译
         if(!$topic->slug){
 
-            //$topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
+            $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
             //调用队列执行
 
-            dispatch(new TranslateSlug($topic));
+            //dispatch(new TranslateSlug($topic));
 
         }
 
     }
+
+
+    public function deleted(Topic $topic)
+    {
+
+        //删除后的逻辑
+        //不使用 $topic->replies()->delete(); 是为了避免数据库操作 Eloquent 事件
+
+        \DB::table('replies')->where('topic_id',$topic->id)->delete();
+
+
+
+    }
+
 
     public function creating(Topic $topic)
     {
@@ -51,4 +65,7 @@ class TopicObserver
     {
         //
     }
+
+
+    
 }
