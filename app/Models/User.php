@@ -61,6 +61,7 @@ class User extends Authenticatable
     }
 
 
+    //标记已阅读
     public function markAsRead()
     {
 
