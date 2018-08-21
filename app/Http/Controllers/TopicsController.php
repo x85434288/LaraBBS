@@ -34,6 +34,7 @@ class TopicsController extends Controller
 		}
 
         return view('topics.show', compact('topic'));
+
     }
 
 	public function create(Topic $topic)
