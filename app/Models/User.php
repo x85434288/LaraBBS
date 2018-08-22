@@ -80,4 +80,33 @@ class User extends Authenticatable
         return $this->id == $model->user_id;
     }
 
+
+    public function setPasswordAttribute($value)
+    {
+
+        //如果长度不是60 就代表是后台修改的密码 需要进行加密处理
+        if( strlen($value) !=60 ){
+
+            $value = bcrypt($value);
+
+        }
+
+        $this->attributes['password'] = $value;
+        
+    }
+
+
+    public function setAvatarAttribute($path)
+    {
+        //如果不是以http开头的字符串 就代表是后台上传的 需要手动拼接url
+        if( !starts_with('http',$path)){
+
+            $path = config('app.url') . "/uploads/images/avatars/$path";
+
+        }
+
+        $this->attributes['avatar'] = $path;
+
+    }
+
 }
