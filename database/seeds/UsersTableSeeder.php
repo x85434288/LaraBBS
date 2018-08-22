@@ -50,5 +50,14 @@ class UsersTableSeeder extends Seeder
         $user->avatar = 'https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png?imageView2/1/w/200/h/200';
         $user->save();
 
+        //将id为1的初始化为站长
+        $user->assignRole('Founder');
+
+        //将id为2的初始化为管理员
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
+        $user->assignRole('Founder');
+
+
     }
 }
