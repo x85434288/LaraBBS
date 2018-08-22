@@ -56,7 +56,6 @@ class UsersTableSeeder extends Seeder
         //将id为2的初始化为管理员
         $user = User::find(2);
         $user->assignRole('Maintainer');
-        $user->assignRole('Founder');
 
 
     }
