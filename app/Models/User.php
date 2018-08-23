@@ -10,6 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
 
+    use Traits\ActiveUserHelper;
     use HasRoles;
     use Notifiable{
 
@@ -108,5 +109,6 @@ class User extends Authenticatable
         $this->attributes['avatar'] = $path;
 
     }
+
 
 }

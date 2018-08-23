@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//use App\Models\Traits\ActiveUserHelper;
+
 
 class PagesController extends Controller
 {
     //
 
+    //use ActiveUserHelper;
+
     public function root()
     {
+
+
+        //dd($this->calculatescore());
 
         return view('pages.root');
     }
