@@ -12,6 +12,8 @@ class UserObserver
     public function creating(User $user)
     {
         //
+        $user->avatar = "";
+
     }
 
     public function updating(User $user)
