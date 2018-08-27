@@ -17,6 +17,8 @@
                             <hr>
                             <h4><strong>注册于</strong></h4>
                             <p>{{ $user->created_at->diffForHumans() }}</p>
+                            <h4>最后活跃于</h4>
+                            <P>{{ $user->last_actived_at->diffForHumans() }}</P>
                         </div>
                     </div>
                 </div>
@@ -54,5 +56,9 @@
             </div>
         </div>
     </div>
+
+
+
+
 
 @stop

@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Redis;
 
 class User extends Authenticatable
 {
 
     use Traits\ActiveUserHelper;
+    use Traits\LastActivedAtHelper;
     use HasRoles;
     use Notifiable{
 
@@ -107,6 +110,14 @@ class User extends Authenticatable
         }
 
         $this->attributes['avatar'] = $path;
+    }
+
+
+    public function getUserLastActivedTime()
+    {
+
+        $time = Redis::hGet('larabbs_last_actived_at_2018-08-27','user_1');
+        return new Carbon($time);
     }
 
 }
