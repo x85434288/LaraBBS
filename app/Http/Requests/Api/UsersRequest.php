@@ -31,4 +31,14 @@ class UsersRequest extends FormRequest
             //
         ];
     }
+
+    public function attributes()
+    {
+
+        return [
+            'verification_key' => '验证码key',
+            'verification_code' => '验证码',
+        ];
+
+    }
 }

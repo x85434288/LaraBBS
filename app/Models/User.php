@@ -113,11 +113,11 @@ class User extends Authenticatable
     }
 
 
-    public function getUserLastActivedTime()
-    {
-
-        $time = Redis::hGet('larabbs_last_actived_at_2018-08-27','user_1');
-        return new Carbon($time);
-    }
+//    public function getUserLastActivedTime()
+//    {
+//
+//        $time = Redis::hGet('larabbs_last_actived_at_2018-08-27','user_1');
+//        return new Carbon($time);
+//    }
 
 }

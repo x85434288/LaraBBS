@@ -15,7 +15,7 @@ class AddPhoneToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->string('phone')->nullable()->unique()->after('name');
+            $table->string('phone')->nullable()->unique()->after('name'); //设置此字段不能存在重复值
             $table->string('email')->nullable()->change();
             //
         });
