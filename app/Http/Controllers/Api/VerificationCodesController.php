@@ -33,8 +33,11 @@ class VerificationCodesController extends Controller
         $key = 'VerificationCode_'.str_random(15); //生成验证码key
         $expiredAt = now()->addMinutes(10);
 
+        //保存在缓存中
         Cache::put($key,['phone'=>$phone,'code'=>$code],$expiredAt);
 
+
+        //返回给客户端
         return $this->response->array(
             [
                 'key' => $key,
