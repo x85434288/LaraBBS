@@ -12,7 +12,7 @@
 */
 
 //index
-Route::get('/','HomeController@index')->name('root');
+Route::get('/','TopicsController@index')->name('root');
 
 
 
