@@ -36,6 +36,9 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api'],function($api){
         //图形验证码
         $api->post('captchas','CaptchasController@store')->name('api.captchas.store');
 
+        //第三方登录
+        $api->post('socials/{socials}/authorizations','AuthorizationsController@socialsStore')->name('api.socials.authorizations.store');
+
     });
 
 });
