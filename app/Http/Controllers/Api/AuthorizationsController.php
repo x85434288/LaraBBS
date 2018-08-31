@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\SocialsRequest;
+use App\Http\Requests\Api\AuthorizationRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthorizationsController extends Controller
 {
     //
 
+    //第三方登录
     public function SocialsStore($type, SocialsRequest $request)
     {
 
@@ -27,7 +30,7 @@ class AuthorizationsController extends Controller
 
                 $response = $driver->getAccessTokenResponse($code);
                 $access_token = array_get($response,'access_token');
-                
+
             }else{
 
                 $access_token = $request->access_token;
@@ -73,23 +76,78 @@ class AuthorizationsController extends Controller
                     'weixin_openid'  => $oauthUser->getId(),
                     'weixin_unionid' => $unionid,
                 ]);
-
             }
 
             break;
 
         }
 
-        return $this->response->array([
-            'authid' => $user->id,
-        ]);
+        $token = Auth::guard('api')->fromUser($user);
 
-
+        return $this->responseWithToken($token)->setStatusCode(201);
 
         //return $this->response->array(['token'=>$type]);
 
 
     }
+
+
+    //登录
+    public function store(AuthorizationRequest $request)
+    {
+
+        $username = $request->username;
+        //验证是否是邮箱 或者 手机号
+        filter_var($username,FILTER_VALIDATE_EMAIL) ? $validate['email'] = $username : $validate['phone'] = $username;
+
+        $validate['password'] = $request->password;
+
+        //验证密码
+        $token = Auth::guard('api')->attempt($validate);
+
+        if(!$token){
+
+            return $this->response->errorUnauthorized('用户名密码错误');
+        }
+
+        return $this->responseWithToken($token)->setStatusCode(201);
+
+    }
+
+    //更新登录凭据
+    public function update()
+    {
+
+        $token = Auth::guard('api')->refresh();
+        return $this->responseWithToken($token);
+    }
+
+    public function destroy()
+    {
+
+        Auth::guard('api')->logout();
+        return $this->response->noContent();
+
+    }
+
+    //返回登录凭据
+    public function responseWithToken($token)
+    {
+
+        $array = [
+
+            'access_token'  => $token,
+            'token_type'  =>'Bearer',
+            'expires_at'  =>Auth::guard('api')->factory()->getTTL()*60,
+
+        ];
+
+        return $this->response->array($array);
+
+    }
+
+
+
 
 }
 

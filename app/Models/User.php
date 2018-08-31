@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +10,7 @@ use Auth;
 use Spatie\Permission\Traits\HasRoles;
 use Redis;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
 
     use Traits\ActiveUserHelper;
@@ -22,8 +23,7 @@ class User extends Authenticatable
         notify as protected laravelNotify;
 
     }
-
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -42,6 +42,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getJWTIdentifier()
+    {
+
+        return $this->getKey();
+        
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+    
 
     public function topics()
     {

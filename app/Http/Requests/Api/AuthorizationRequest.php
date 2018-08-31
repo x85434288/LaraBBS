@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Dingo\Api\Http\FormRequest;
 
-class SocialsRequest extends FormRequest
+class AuthorizationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,10 @@ class SocialsRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required_without:access_token|string',
-            'access_token'  => 'required_without:code|string'
+
+            'username' => 'required|string',
+            'password' => 'required|string|min:6'
             //
         ];
-
-        if($this->social_type == 'weixin' && !$this->code) {
-            $rules['openid']  = 'required|string';
-        }
     }
 }

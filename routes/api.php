@@ -37,8 +37,16 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api'],function($api){
         $api->post('captchas','CaptchasController@store')->name('api.captchas.store');
 
         //第三方登录
-        $api->post('socials/{socials}/authorizations','AuthorizationsController@socialsStore')->name('api.socials.authorizations.store');
+        $api->post('socials/{social_type}/authorizations','AuthorizationsController@socialsStore')->name('api.socials.authorizations.store');
 
+        //登录
+        $api->post('authorizations','AuthorizationsController@store')->name('api.authorizations.store');
+
+        //刷新
+        $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.current');
+
+        //登出
+        $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.current');
     });
 
 });
