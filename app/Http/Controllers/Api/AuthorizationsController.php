@@ -96,6 +96,7 @@ class AuthorizationsController extends Controller
     public function store(AuthorizationRequest $request)
     {
 
+
         $username = $request->username;
         //验证是否是邮箱 或者 手机号
         filter_var($username,FILTER_VALIDATE_EMAIL) ? $validate['email'] = $username : $validate['phone'] = $username;
