@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UsersRequest;
 use Cache;
@@ -51,7 +52,7 @@ class UsersController extends Controller
 
     }
 
-
+    //返回个人信息
     public function me()
     {
 
@@ -64,6 +65,31 @@ class UsersController extends Controller
 //            'type' => 'Bearer',
 //
 //        ])->setStatusCode(201);
+    }
+
+
+    //更新个人信息
+    public function update(UsersRequest $request)
+    {
+
+        //获取上传用户信息
+        $user = Auth::guard('api')->user();
+
+        //获取用户提交参数
+        $attributes = $request->only('name','email','introduction');
+
+        if($request->avatar_image_id){
+
+            $image = Image::find($request->avatar_image_id);
+            $attributes['avatar'] = $image->path;
+
+        }
+
+        $user->update($attributes);
+
+        return $this->response->item($user, new UserTransformer());
+        //print_r($attributes);
+
     }
     
 }

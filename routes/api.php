@@ -59,6 +59,15 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>'seria
             // 当前登录用户信息
             $api->get('user', 'UsersController@me')
                 ->name('api.user.show');
+
+            //上传图片
+            $api->post('image','ImagesController@store')
+                ->name('api.images.store');
+
+            //编辑个人信息
+            $api->patch('user','usersController@update')
+                ->name('api.users.update');
+
         });
 
 
