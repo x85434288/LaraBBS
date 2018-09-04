@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>'serializer:array'],function($api){
+$api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['serializer:array', 'bindings']],function($api){
 
     $api->group([
 
@@ -72,6 +72,10 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>'seria
 
             //添加话题
             $api->post('topics','TopicsController@store')->name('api.topics.store');
+
+            //修改话题
+            $api->patch('topics/{topic}', 'TopicsController@update')
+                ->name('api.topics.update');
 
 
         });

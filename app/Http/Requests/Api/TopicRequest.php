@@ -25,30 +25,39 @@ class TopicRequest extends FormRequest
     {
 
         switch($this->method()){
-            case 'POST':
 
+            case 'POST':
                 return [
 
                     'title'       => 'required|min:2',
                     'body'        => 'required|min:3',
-                    'category_id' => 'required|numeric|exits:categories,id',
+                    'category_id' => 'required|numeric|exists:categories,id',
 
                 ];
                 break;
-            case 'PATCH':
 
+            case 'PATCH':
+                return [
+
+                    'title'       => 'min:2',
+                    'body'        => 'min:3',
+                    'category_id' => 'numeric|exists:categories,id',
+
+                ];
                 break;
+
             case 'GET':
 
                 break;
+
             case 'DELETE':
 
                 break;
         }
 
-        return [
-            //
-        ];
+//        return [
+//            //
+//        ];
     }
 
     public function attributes()
