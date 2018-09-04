@@ -19,5 +19,7 @@ class CategoriesController extends Controller
         return $this->response->collection($categories, new CategoryTransformer());
         
     }
+
+
     
 }

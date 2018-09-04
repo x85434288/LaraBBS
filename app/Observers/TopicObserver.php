@@ -34,9 +34,12 @@ class TopicObserver
         if(!$topic->slug){
 
             $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
-            //调用队列执行
 
+            //调用队列执行
             //dispatch(new TranslateSlug($topic));
+
+            //单独执行
+            \DB::table('topics')->where('id',$topic->id)->update(['slug'=>$topic->slug]);
 
         }
 

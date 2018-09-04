@@ -70,6 +70,9 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>'seria
             $api->patch('user','usersController@update')
                 ->name('api.users.update');
 
+            //添加话题
+            $api->post('topics','TopicsController@store')->name('api.topics.store');
+
 
         });
 
