@@ -43,19 +43,21 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>'seria
         //登录
         $api->post('authorizations','AuthorizationsController@store')->name('api.authorizations.store');
 
-        //刷新
-        $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.current');
-
-        //登出
-        $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.current');
+        //获取话题分类
+        $api->get('categories','CategoriesController@index')->name('api.categories.index');
 
 
 
         //登录后才能访问的接口
-
-
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
+
+            //刷新token
+            $api->put('authorizations/current','AuthorizationsController@update')->name('api.authorizations.current');
+
+            //删除token
+            $api->delete('authorizations/current','AuthorizationsController@destroy')->name('api.authorizations.current');
+
             // 当前登录用户信息
             $api->get('user', 'UsersController@me')
                 ->name('api.user.show');
@@ -67,6 +69,7 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>'seria
             //编辑个人信息
             $api->patch('user','usersController@update')
                 ->name('api.users.update');
+
 
         });
 
