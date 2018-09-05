@@ -46,6 +46,15 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
         //获取话题分类
         $api->get('categories','CategoriesController@index')->name('api.categories.index');
 
+        //获取话题列表
+        $api->get('topics','TopicsController@index')->name('api.topics.index');
+
+        //获取某个用户发布话题列表
+        $api->get('users/{user}/topics','UsersController@userIndex')->name('api.users.topics.index');
+
+        //获取某个话题详情
+        $api->get('topics/{topic}','TopicsController@show')->name('api.topics.show');
+
 
 
         //登录后才能访问的接口
@@ -77,6 +86,9 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
             $api->patch('topics/{topic}', 'TopicsController@update')
                 ->name('api.topics.update');
 
+            //删除话题
+            $api->delete('topics/{topic}','TopicsController@destroy')
+                ->name('api.topics.destroy');
 
         });
 

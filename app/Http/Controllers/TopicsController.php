@@ -17,7 +17,7 @@ class TopicsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'test']]);
     }
 
 	public function index(Request $request, Topic $topic, User $user, Link $link)
@@ -110,4 +110,15 @@ class TopicsController extends Controller
 		return $data;
 
 	}
+
+
+//	public function test(Topic $topic)
+//	{
+//
+//		$topics = $topic->find(1)->user;
+//		//$topics = $topic->user()->where('id',1)->toArray();
+//		dd($topics);
+//	}
+
+
 }

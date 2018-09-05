@@ -45,14 +45,6 @@ class TopicRequest extends FormRequest
 
                 ];
                 break;
-
-            case 'GET':
-
-                break;
-
-            case 'DELETE':
-
-                break;
         }
 
 //        return [

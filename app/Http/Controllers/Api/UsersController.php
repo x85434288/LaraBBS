@@ -9,6 +9,7 @@ use App\Http\Requests\Api\UsersRequest;
 use Cache;
 use Auth;
 use App\Transformers\UserTransformer;
+use App\Transformers\TopicTransformer;
 
 class UsersController extends Controller
 {
@@ -89,6 +90,17 @@ class UsersController extends Controller
 
         return $this->response->item($user, new UserTransformer());
         //print_r($attributes);
+
+    }
+
+    //个人发布话题列表
+
+    public function userIndex(User $user, Request $request)
+    {
+
+        $topics = $user->topics()->recent()->paginate(20);
+
+        return $this->response->paginator($topics, new TopicTransformer());
 
     }
     

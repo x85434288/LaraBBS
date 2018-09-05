@@ -5,13 +5,17 @@
  * Date: 2018/9/4
  * Time: 10:43
  */
-
 namespace App\Transformers;
 
 use App\Models\Topic;
 use League\Fractal\TransformerAbstract;
 
 class TopicTransformer extends TransformerAbstract{
+
+
+    protected $availableIncludes = [
+        'user','category'
+    ];
 
     public function transform(Topic $topic)
     {
@@ -31,7 +35,23 @@ class TopicTransformer extends TransformerAbstract{
             'slug'  => $topic->slug,
             'created_at' => $topic->created_at->toDateTimeString(),
             'updated_at' => $topic->updated_at->toDateTimeString(),
+
         ];
+
+    }
+
+    public function includeUser(Topic $topic)
+    {
+
+        $users = $topic->user;
+        return $this->item($users, new UserTransformer());
+
+    }
+
+    public function includeCategory(Topic $topic)
+    {
+        $categories = $topic->category;
+        return $this->item($categories, new CategoryTransformer());
 
     }
 

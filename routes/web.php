@@ -41,6 +41,9 @@ Route::resource('users','UsersController',['only'=>['show','edit','update']]);
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
 
+//测试函数
+Route::get('topics/test','TopicsController@test')->name('topics.test');
+
 //分类列表
 Route::resource('categories','CategoriesController',['only'=>['show']]);
 
