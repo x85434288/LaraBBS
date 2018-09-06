@@ -107,6 +107,10 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
             $api->delete('topics/{topic}/replies/{reply}','RepliesController@destroy')
                 ->name('api.topics.replies.destroy');
 
+            //用户通知列表
+            $api->get('user/notifications','NotificationsController@index')
+                ->name('api.user.notification.index');
+
 
         });
 
