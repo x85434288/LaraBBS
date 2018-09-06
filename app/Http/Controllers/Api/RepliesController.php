@@ -14,8 +14,9 @@ class RepliesController extends Controller
 
     public function store(Reply $reply, ReplyRequest $request, Topic $topic)
     {
-
+        //获取用户的实例等于  Auth::guard('api')->user()
         $user = $this->user();
+
         $reply->content = $request->content;
         $reply->user_id = $user->id;
         $reply->topic_id = $topic->id;
@@ -24,5 +25,26 @@ class RepliesController extends Controller
         return $this->response->item($reply,new ReplyTransformer())->setStatusCode(201);
 
     }
+
+
+    public function destroy(Topic $topic, Reply $reply)
+    {
+
+        //判断删除的回复是否属于某一话题
+        if($reply->topic_id != $topic->id){
+            return $this->response->errorBadRequest();
+        }
+
+        //判断用户是否有删除权限
+        $this->authorize('destroy',$reply);
+        //删除回复
+        $reply->delete();
+
+        return $this->response->noContent();
+
+    }
+
+
+    
 
 }
