@@ -89,7 +89,7 @@ class TopicsController extends Controller
 
     }
 
-    
+
     //话题详情
     public function show(Topic $topic)
     {
