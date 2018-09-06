@@ -111,6 +111,13 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
             $api->get('user/notifications','NotificationsController@index')
                 ->name('api.user.notification.index');
 
+            //用户未读回复
+            $api->get('user/notifications/stats','NotificationsController@stats')
+                ->name('api.user.notification.stats');
+
+            //清除未读消息
+            
+
 
         });
 

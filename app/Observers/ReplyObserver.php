@@ -24,7 +24,14 @@ class ReplyObserver
         $topic->increment('reply_count',1);
 
         //回复之后通知发帖的用户
-        $topic->user->notify(new TopicReplied($reply));
+        //其他用户回复的才通知
+        if(!$reply->user->isAuthorOf($topic)){
+
+            $topic->user->notify(new TopicReplied($reply));
+
+        }
+
+
 
 
     }
