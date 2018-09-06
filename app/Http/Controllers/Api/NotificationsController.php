@@ -30,7 +30,12 @@ class NotificationsController extends Controller
     }
 
 
+    public function read()
+    {
 
+        $this->user()->markAsRead();
+        return $this->response->noContent();
+    }
 
 
 }

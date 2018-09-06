@@ -116,8 +116,8 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
                 ->name('api.user.notification.stats');
 
             //清除未读消息
-            
-
+            $api->patch('user/read/notifications','NotificationsController@read')
+                ->name('api.user.notifications.read');
 
         });
 
