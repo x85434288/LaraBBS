@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Reply;
 use App\Models\Topic;
+use App\Models\User;
 use App\Transformers\ReplyTransformer;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\ReplyRequest;
+//use League\OAuth1\Client\Server\User;
 
 class RepliesController extends Controller
 {
@@ -44,7 +46,30 @@ class RepliesController extends Controller
 
     }
 
+    //某个话题的回复列表
+    public function topicReplyIndex(Topic $topic)
+    {
 
-    
+        $replies = $topic->replies()->paginate(20);
+
+        return $this->response->paginator($replies, new ReplyTransformer());
+
+    }
+
+
+    //某个用户的回复列表
+    public function userReplyIndex(User $user)
+    {
+
+        $replies = $user->replies()->paginate(20);
+
+        return $this->response->paginator($replies, new ReplyTransformer());
+
+    }
+
+
+
+
+
 
 }

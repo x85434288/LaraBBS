@@ -55,6 +55,15 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
         //获取某个话题详情
         $api->get('topics/{topic}','TopicsController@show')->name('api.topics.show');
 
+        //某个话题的回复列表
+        $api->get('topics/{topic}/replies', 'RepliesController@topicReplyIndex')
+            ->name('api.topics.replies.topicReplyIndex');
+
+
+        //某个用户的回复列表
+        $api->get('users/{user}/replies','RepliesController@userReplyIndex')
+            ->name('api.users.replies.userReplyIndex');
+
 
 
         //登录后才能访问的接口
@@ -97,6 +106,8 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
             //删除回复
             $api->delete('topics/{topic}/replies/{reply}','RepliesController@destroy')
                 ->name('api.topics.replies.destroy');
+
+
         });
 
 
