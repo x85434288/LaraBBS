@@ -119,6 +119,10 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
             $api->patch('user/read/notifications','NotificationsController@read')
                 ->name('api.user.notifications.read');
 
+            //当前登录用户权限
+            $api->get('user/permissions','PermissionsController@show')->name('api.user.permissions.show');
+
+
         });
 
 
