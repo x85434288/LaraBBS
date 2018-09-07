@@ -64,6 +64,12 @@ $api->version('v1',['namespace'=>'App\Http\Controllers\Api','middleware'=>['seri
         $api->get('users/{user}/replies','RepliesController@userReplyIndex')
             ->name('api.users.replies.userReplyIndex');
 
+        //获取活跃用户
+        $api->get('users/active','UsersController@active')->name('api.users.active');
+
+        //获取推荐资源
+        $api->get('links','LinksController@index')->name('api.links.index');
+
 
 
         //登录后才能访问的接口

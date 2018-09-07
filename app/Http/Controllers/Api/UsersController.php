@@ -103,5 +103,15 @@ class UsersController extends Controller
         return $this->response->paginator($topics, new TopicTransformer());
 
     }
+
+
+    public function active(User $user)
+    {
+
+        $users = $user->getActiveUsers();
+
+        return $this->response->collection($users, new UserTransformer());
+
+    }
     
 }
