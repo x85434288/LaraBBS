@@ -108,7 +108,9 @@ class AuthorizationsController extends Controller
 
         if(!$token){
 
-            return $this->response->errorUnauthorized('用户名密码错误');
+            //return $this->response->errorUnauthorized('用户名密码错误');
+
+            return $this->response->errorUnauthorized(trans('auth.failed'));
         }
 
         return $this->responseWithToken($token)->setStatusCode(201);

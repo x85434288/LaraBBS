@@ -16,6 +16,8 @@ class LinksController extends Controller
 
         return $this->response->collection($links, new LinkTransformer());
 
+        //return $this->errorResponse(403,'不能查询到资源推荐',1003);
+
     }
 
 }
