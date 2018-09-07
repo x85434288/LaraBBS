@@ -125,6 +125,7 @@ class AuthorizationsController extends Controller
         return $this->responseWithToken($token);
     }
 
+    //删除登录凭据
     public function destroy()
     {
 
